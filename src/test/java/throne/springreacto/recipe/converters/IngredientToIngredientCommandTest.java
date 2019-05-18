@@ -34,7 +34,17 @@ public class IngredientToIngredientCommandTest {
 
     @Test
     public void testEmptyObject() {
-        assertNotNull(converter.convert(new Ingredient()));
+
+        //given
+        Ingredient ingredient = new Ingredient();
+        Recipe recipe = new Recipe();
+        ingredient.setRecipe(recipe);
+
+        //when
+        IngredientCommand convertedCmd = converter.convert(ingredient);
+
+        //then
+        assertNotNull(convertedCmd);
     }
 
     @Test
@@ -49,7 +59,7 @@ public class IngredientToIngredientCommandTest {
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertNull(ingredientCommand.getUnitOfMeasureCommand());
+        assertNull(ingredientCommand.getUnitOfMeasure());
         assertEquals(ID_VALUE, ingredientCommand.getId());
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
@@ -72,8 +82,8 @@ public class IngredientToIngredientCommandTest {
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
         assertEquals(ID_VALUE, ingredientCommand.getId());
-        assertNotNull(ingredientCommand.getUnitOfMeasureCommand());
-        assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasureCommand().getId());
+        assertNotNull(ingredientCommand.getUnitOfMeasure());
+        assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasure().getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());

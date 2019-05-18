@@ -46,4 +46,18 @@ public class RecipeServiceImp implements RecipeService {
         RecipeCommand savedRecipeCommand = recipeToRecipeCommand.convert(savedRecipe);
         return savedRecipeCommand;
     }
+
+    @Override
+    @Transactional //Added because we do conversion outside of spring initiated transaction. In case of lazy loading, without this it will throw exception
+    public RecipeCommand findCommandById(Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        Recipe recipe = recipeOptional.orElseThrow(() -> new IllegalArgumentException("No recipe is found with this ID"));
+        RecipeCommand returnedRecipeCommand = recipeToRecipeCommand.convert(recipe);
+        return returnedRecipeCommand;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
+    }
 }

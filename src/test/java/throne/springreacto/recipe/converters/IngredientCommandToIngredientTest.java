@@ -2,19 +2,14 @@ package throne.springreacto.recipe.converters;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import throne.springreacto.recipe.commands.IngredientCommand;
 import throne.springreacto.recipe.commands.UnitOfMeasureCommand;
 import throne.springreacto.recipe.domain.Ingredient;
-import throne.springreacto.recipe.domain.UnitOfMeasure;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 public class IngredientCommandToIngredientTest {
     public static final Long IG_ID = 1L;
@@ -50,7 +45,7 @@ public class IngredientCommandToIngredientTest {
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
         unitOfMeasureCommand.setDescription(UOM_DESCRIPTION);
-        ingredientCommand.setUnitOfMeasureCommand(unitOfMeasureCommand);
+        ingredientCommand.setUnitOfMeasure(unitOfMeasureCommand);
 
         //when
         Ingredient ingredient = sut.convert(ingredientCommand);
