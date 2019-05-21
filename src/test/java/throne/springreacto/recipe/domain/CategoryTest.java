@@ -15,13 +15,10 @@ public class CategoryTest {
 
     @Test
     public void getId() {
-    }
+        Long idValue = 4L;
 
-    @Test
-    public void getDescription() {
-    }
+        category.setId(idValue);
 
-    @Test
-    public void getRecipes() {
+        assertEquals(idValue, category.getId());
     }
 }

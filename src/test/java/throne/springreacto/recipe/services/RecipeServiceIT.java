@@ -30,14 +30,9 @@ public class RecipeServiceIT {
     @Autowired
     RecipeService sut;
 
-    @Before
-    public void setup(){
-        //sut = new RecipeServiceImp(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
-    }
-
     @Test
     @Transactional
-    public void testDescription() throws Exception{
+    public void testDescription(){
         //given
         Iterable<Recipe> allRecipes = recipeRepository.findAll();
         Recipe testRecipe = allRecipes.iterator().next();

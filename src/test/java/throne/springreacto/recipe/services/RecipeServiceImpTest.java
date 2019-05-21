@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 public class RecipeServiceImpTest {
 
     public static final Long RECIPE_ID = 1L;
+    public static final Long CMD_ID = 2L;
     RecipeServiceImp sut;
     @Mock
     RecipeRepository recipeRepository;
@@ -57,18 +58,15 @@ public class RecipeServiceImpTest {
         Recipe recipe = new Recipe();
         recipe.setId(RECIPE_ID);
         RecipeCommand recipeCommand = new RecipeCommand();
-        recipeCommand.setId(2L);
-        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+        recipeCommand.setId(CMD_ID);
+        when(recipeRepository.findById(RECIPE_ID)).thenReturn(Optional.of(recipe));
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
 
         RecipeCommand commandById = sut.findCommandById(RECIPE_ID);
 
+        assertEquals(CMD_ID, commandById.getId());
         verify(recipeRepository).findById(RECIPE_ID);
         verify(recipeToRecipeCommand).convert(recipe);
-    }
-
-    @Test
-    public void saveRecipeCommand(){
-        
     }
 
     @Test

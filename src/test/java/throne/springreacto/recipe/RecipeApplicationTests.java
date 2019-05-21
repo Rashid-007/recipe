@@ -1,4 +1,4 @@
-package throne.springreacto.recipe.recipe;
+package throne.springreacto.recipe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

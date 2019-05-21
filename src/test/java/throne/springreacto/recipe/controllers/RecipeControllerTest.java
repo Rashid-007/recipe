@@ -39,7 +39,7 @@ public class RecipeControllerTest {
 
         when(recipeService.getById(anyLong())).thenReturn(recipe);
 
-        mockMvc.perform(get("/recipe/1"))
+        mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().is(200))
                 .andExpect(model().attributeExists("recipe"))
                 .andExpect(model().attribute("recipe", hasProperty("id", notNullValue())))
@@ -92,7 +92,7 @@ public class RecipeControllerTest {
         Long id = Long.valueOf(2L);
 
         //when
-        mockMvc.perform(delete("/recipe/" + id + "/delete"))
+        mockMvc.perform(get("/recipe/" + id + "/delete"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 

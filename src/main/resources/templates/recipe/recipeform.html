@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
     <title>Recipe Form</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"
-    >
-    <!--th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
 
-    <!--<script src="/webjars/jquery/jquery.min.js"></script>-->
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-            crossorigin="anonymous"></script>
-    <!--th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
-<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
+<!--/*@thymesVar id="recipe" type="throne.springreacto.recipe.domain.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
