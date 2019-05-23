@@ -6,6 +6,7 @@ import throne.springreacto.recipe.commands.RecipeCommand;
 import throne.springreacto.recipe.converters.RecipeCommandToRecipe;
 import throne.springreacto.recipe.converters.RecipeToRecipeCommand;
 import throne.springreacto.recipe.domain.Recipe;
+import throne.springreacto.recipe.exception.NotFoundException;
 import throne.springreacto.recipe.repositories.RecipeRepository;
 
 import javax.transaction.Transactional;
@@ -35,7 +36,7 @@ public class RecipeServiceImp implements RecipeService {
     @Override
     public Recipe getById(Long id) {
         Optional<Recipe> foundById = recipeRepository.findById(id);
-        return foundById.orElseThrow(() -> new RuntimeException("Recipe not found!"));
+        return foundById.orElseThrow(() -> new NotFoundException("Recipe not found for id value: " + id.toString()));//Customized exception instead of RuntimeException
     }
 
     @Override

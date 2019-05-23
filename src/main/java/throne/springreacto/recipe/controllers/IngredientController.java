@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import throne.springreacto.recipe.commands.IngredientCommand;
 import throne.springreacto.recipe.commands.RecipeCommand;
 import throne.springreacto.recipe.commands.UnitOfMeasureCommand;
+import throne.springreacto.recipe.domain.Difficulty;
 import throne.springreacto.recipe.services.IngredientService;
 import throne.springreacto.recipe.services.RecipeService;
 import throne.springreacto.recipe.services.UnitOfMeasureService;

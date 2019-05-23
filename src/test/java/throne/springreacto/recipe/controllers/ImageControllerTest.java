@@ -2,6 +2,7 @@ package throne.springreacto.recipe.controllers;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -26,6 +27,7 @@ public class ImageControllerTest {
     @Mock
     RecipeService recipeService;
 
+    @InjectMocks
     ImageController controller;
 
     MockMvc mockMvc;
@@ -34,8 +36,8 @@ public class ImageControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        controller = new ImageController(imageService, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler()).build();
     }
 
     @Test
@@ -97,5 +99,14 @@ public class ImageControllerTest {
         byte[] reponseBytes = response.getContentAsByteArray();
 
         assertEquals(s.getBytes().length, reponseBytes.length);
+    }
+
+    @Test
+    public void getImageById_withInvalidIdFormat_expectBadRequest() throws Exception{
+
+        //when
+        mockMvc.perform(get("/recipe/wr2/recipeimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 }

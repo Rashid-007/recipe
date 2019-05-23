@@ -44,7 +44,8 @@ public class IngredientServiceImpTest {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        sut = new IngredientServiceImp(recipeRepository, ingredientToIngredientCommand, ingredientCommandToIngredient, unitOfMeasureRepository);
+        sut = new IngredientServiceImp(recipeRepository, ingredientToIngredientCommand, ingredientCommandToIngredient,
+                unitOfMeasureRepository);
     }
 
     @Test

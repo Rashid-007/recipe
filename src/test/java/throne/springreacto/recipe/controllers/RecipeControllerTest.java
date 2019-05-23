@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import throne.springreacto.recipe.commands.RecipeCommand;
 import throne.springreacto.recipe.domain.Recipe;
+import throne.springreacto.recipe.exception.NotFoundException;
 import throne.springreacto.recipe.services.RecipeService;
 
 import static org.hamcrest.Matchers.*;
@@ -29,7 +30,8 @@ public class RecipeControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(sut).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(sut)
+                .setControllerAdvice(new ControllerExceptionHandler()).build();
     }
 
     @Test
@@ -49,6 +51,27 @@ public class RecipeControllerTest {
     }
 
     @Test
+    public void getRecipeByIdStatusNotFound() throws Exception{
+
+        //when
+        when(recipeService.getById(anyLong())).thenThrow(NotFoundException.class);
+
+        //when
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
+    }
+
+    @Test
+    public void getRecipeById_withInvalidIdFormat_expectBadRequest() throws Exception{
+
+        //when
+        mockMvc.perform(get("/recipe/1ccds/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
+    }
+
+    @Test
     public void requestRecipeFormStatusOk() throws Exception {
         mockMvc.perform(get("/recipe/new"))
                 .andExpect(status().is(200))
@@ -58,18 +81,41 @@ public class RecipeControllerTest {
 
     @Test
     public void testSaveUpdateRecipeStatusOk() throws Exception {
+
+        //given
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(2L);
         when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
 
+        //when --> then
         mockMvc.perform(post("/recipe")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "")
-                .param("description", "some description"))
+                .param("description", "some description")
+                .param("directions", "some description"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/recipe/2"));
+                .andExpect(view().name("redirect:/recipe/2/show"));
 
         verify(recipeService).saveRecipeCommand(any());
+    }
+
+    @Test
+    public void testSaveUpdateRecipeValidationFail() throws Exception {
+
+        //given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(2L);
+
+        when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
+
+        //when
+        mockMvc.perform(post("/recipe")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("cookTime", "2000"))
+
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/recipeform"));
     }
 
     @Test

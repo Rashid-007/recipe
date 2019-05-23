@@ -8,8 +8,10 @@ import throne.springreacto.recipe.commands.RecipeCommand;
 import throne.springreacto.recipe.converters.RecipeCommandToRecipe;
 import throne.springreacto.recipe.converters.RecipeToRecipeCommand;
 import throne.springreacto.recipe.domain.Recipe;
+import throne.springreacto.recipe.exception.NotFoundException;
 import throne.springreacto.recipe.repositories.RecipeRepository;
 
+import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -50,6 +52,20 @@ public class RecipeServiceImpTest {
         assertEquals(Long.valueOf(RECIPE_ID) , recipe.getId());
         assertNotNull("Null recipe returned", recipe);
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdNotFound(){
+
+        //given
+        Optional<Recipe> recipeOptional= Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        //when
+        Recipe recipe = sut.getById(RECIPE_ID);
+
+        //then expect exception
     }
 
     @Test
