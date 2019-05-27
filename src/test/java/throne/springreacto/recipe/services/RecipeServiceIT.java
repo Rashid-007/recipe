@@ -32,7 +32,7 @@ public class RecipeServiceIT {
 
     @Test
     @Transactional
-    public void testDescription(){
+    public void testDescription() {
         //given
         Iterable<Recipe> allRecipes = recipeRepository.findAll();
         Recipe testRecipe = allRecipes.iterator().next();

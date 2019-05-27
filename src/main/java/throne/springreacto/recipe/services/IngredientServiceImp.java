@@ -52,7 +52,7 @@ public class IngredientServiceImp implements IngredientService {
     public IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand, Long recipeId) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
-        if(recipeOptional.isPresent()){
+        if (recipeOptional.isPresent()) {
             Recipe recipe = recipeOptional.get();
 
             Optional<Ingredient> ingredientOptional = recipe
@@ -61,7 +61,7 @@ public class IngredientServiceImp implements IngredientService {
                     .filter(ingredient -> ingredient.getId().equals(ingredientCommand.getId()))
                     .findFirst();
 
-            if(ingredientOptional.isPresent()){
+            if (ingredientOptional.isPresent()) {
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(ingredientCommand.getDescription());
                 ingredientFound.setAmount(ingredientCommand.getAmount());
@@ -82,7 +82,7 @@ public class IngredientServiceImp implements IngredientService {
                     .findFirst();
 
             //check by description
-            if(!savedIngredientOptional.isPresent()){
+            if (!savedIngredientOptional.isPresent()) {
                 //not totally safe... But best guess
                 savedIngredientOptional = savedRecipe.getIngredients().stream()
                         .filter(recipeIngredients -> recipeIngredients.getDescription().equals(ingredientCommand.getDescription()))
@@ -93,7 +93,7 @@ public class IngredientServiceImp implements IngredientService {
 
             //to do check for fail
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
-        } else{
+        } else {
             log.error("Recipe not found for id: " + ingredientCommand.getRecipeId());
             return new IngredientCommand();
         }
@@ -108,7 +108,7 @@ public class IngredientServiceImp implements IngredientService {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
-        if(recipeOptional.isPresent()){
+        if (recipeOptional.isPresent()) {
             Recipe recipe = recipeOptional.get();
             log.debug("found recipe");
 
@@ -118,7 +118,7 @@ public class IngredientServiceImp implements IngredientService {
                     .filter(ingredient -> ingredient.getId().equals(idToDelete))
                     .findFirst();
 
-            if(ingredientOptional.isPresent()){
+            if (ingredientOptional.isPresent()) {
                 log.debug("found Ingredient");
                 Ingredient ingredientToDelete = ingredientOptional.get();
                 ingredientToDelete.setRecipe(null);

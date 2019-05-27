@@ -25,21 +25,21 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipe/{recipe_id}/show", method = RequestMethod.GET)
-    public String getRecipeById(@PathVariable("recipe_id") Long id, Model model){
+    public String getRecipeById(@PathVariable("recipe_id") Long id, Model model) {
         model.addAttribute("recipe", recipeService.getById(id));
         return "recipe/show";
     }
 
     @GetMapping("/recipe/new")
-    public String requesRecipeForm(Model model){
+    public String requesRecipeForm(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
 
         return "recipe/recipeform";
     }
 
     @PostMapping("recipe")
-    public String saveUpdateRecipe(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String saveUpdateRecipe(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
             return RECIPE_RECIPEFORM_URL;
@@ -51,21 +51,22 @@ public class RecipeController {
     }
 
     @GetMapping(value = "/recipe/{id}/update")
-    public String updateRecipe(@PathVariable("id") Long id, Model model){
+    public String updateRecipe(@PathVariable("id") Long id, Model model) {
         RecipeCommand commandById = recipeService.findCommandById(id);
         model.addAttribute("recipe", commandById);
         return "recipe/recipeform";
     }
 
     @GetMapping(value = "/recipe/{recipe_id}/delete")
-    public String deleteRecipe(@PathVariable("recipe_id") Long id){
+    public String deleteRecipe(@PathVariable("recipe_id") Long id) {
         recipeService.deleteById(id);
 
         return "redirect:/";
     }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleControllerNotFoundException(Exception ex){
+    public ModelAndView handleControllerNotFoundException(Exception ex) {
         log.error("Handling not found Exception");
         ModelAndView notFoundView = new ModelAndView();
         log.error(ex.getMessage());

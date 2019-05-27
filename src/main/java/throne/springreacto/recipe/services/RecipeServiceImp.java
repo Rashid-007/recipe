@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
 @Slf4j
 @Service
 public class RecipeServiceImp implements RecipeService {
@@ -49,7 +50,8 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    @Transactional //Added because we do conversion outside of spring initiated transaction. In case of lazy loading, without this it will throw exception
+    @Transactional
+    //Added because we do conversion outside of spring initiated transaction. In case of lazy loading, without this it will throw exception
     public RecipeCommand findCommandById(Long id) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
         Recipe recipe = recipeOptional.orElseThrow(() -> new IllegalArgumentException("No recipe is found with this ID"));

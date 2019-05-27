@@ -42,7 +42,7 @@ public class IngredientServiceImpTest {
     }
 
     @Before
-    public void setup(){
+    public void setup() {
         MockitoAnnotations.initMocks(this);
         sut = new IngredientServiceImp(recipeRepository, ingredientToIngredientCommand, ingredientCommandToIngredient,
                 unitOfMeasureRepository);
@@ -76,6 +76,7 @@ public class IngredientServiceImpTest {
         assertEquals(CMD_ID, result.getId());
         verify(recipeRepository, times(1)).findById(RECIPE_ID);
     }
+
     @Test
     public void testSaveIngredientCommand() {
         //given
@@ -101,6 +102,7 @@ public class IngredientServiceImpTest {
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
     }
+
     @Test
     public void testDeleteById() {
         //given

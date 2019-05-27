@@ -12,7 +12,7 @@ import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
-public class UnitOfMeasureServiceImp implements UnitOfMeasureService{
+public class UnitOfMeasureServiceImp implements UnitOfMeasureService {
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final UnitOfMeasureToUnitOfMeasureCommand uomToUnitOfMeasureCommand;
@@ -23,6 +23,7 @@ public class UnitOfMeasureServiceImp implements UnitOfMeasureService{
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.uomToUnitOfMeasureCommand = uomToUnitOfMeasureCommand;
     }
+
     @Override
     public Set<UnitOfMeasureCommand> getUnitOfMeasureList() {
         Set<UnitOfMeasureCommand> collect = StreamSupport.stream(unitOfMeasureRepository.findAll()

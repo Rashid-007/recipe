@@ -1,6 +1,8 @@
 package throne.springreacto.recipe.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import throne.springreacto.recipe.domain.*;
@@ -12,7 +14,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+@Slf4j
 @Component
+@Profile("default")
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
@@ -27,6 +32,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading Bootstrap data");
     }
 
     private List<Recipe> getRecipes() {
@@ -44,13 +50,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         //get Categories
         Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
 
-        if(!americanCategoryOptional.isPresent()){
+        if (!americanCategoryOptional.isPresent()) {
             throw new RuntimeException("Expected Category Not Found");
         }
 
         Optional<Category> mexicanCategoryOptional = categoryRepository.findByDescription("Mexican");
 
-        if(!mexicanCategoryOptional.isPresent()){
+        if (!mexicanCategoryOptional.isPresent()) {
             throw new RuntimeException("Expected Category Not Found");
         }
 

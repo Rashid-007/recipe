@@ -21,7 +21,7 @@ public class IngredientCommandToIngredientTest {
     IngredientCommandToIngredient sut;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sut = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 

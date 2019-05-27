@@ -13,6 +13,7 @@ import throne.springreacto.recipe.domain.UnitOfMeasure;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UnitOfMeasureRepositoryIT {

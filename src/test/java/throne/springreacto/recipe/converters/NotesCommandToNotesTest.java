@@ -30,7 +30,7 @@ public class NotesCommandToNotesTest {
     }
 
     @Test
-    public void convert(){
+    public void convert() {
         //given
         NotesCommand notesCommand = new NotesCommand();
         notesCommand.setId(ID_VALUE);

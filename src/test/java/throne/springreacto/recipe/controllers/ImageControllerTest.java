@@ -61,7 +61,7 @@ public class ImageControllerTest {
     public void handleImagePost() throws Exception {
         MockMultipartFile multipartFile =
                 new MockMultipartFile("imagefile", "testing.txt", "text/plain",
-                        "Spring Framework Guru".getBytes());
+                        "Spring Framework".getBytes());
 
         mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
                 .andExpect(status().is3xxRedirection())
@@ -83,7 +83,7 @@ public class ImageControllerTest {
 
         int i = 0;
 
-        for (byte primByte : s.getBytes()){
+        for (byte primByte : s.getBytes()) {
             bytesBoxed[i++] = primByte;
         }
 
@@ -102,7 +102,7 @@ public class ImageControllerTest {
     }
 
     @Test
-    public void getImageById_withInvalidIdFormat_expectBadRequest() throws Exception{
+    public void getImageById_withInvalidIdFormat_expectBadRequest() throws Exception {
 
         //when
         mockMvc.perform(get("/recipe/wr2/recipeimage"))

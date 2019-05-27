@@ -27,6 +27,7 @@ public class RecipeControllerTest {
     RecipeController sut;
 
     MockMvc mockMvc;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -35,7 +36,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void getRecipeByIdStatusOk() throws Exception{
+    public void getRecipeByIdStatusOk() throws Exception {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
 
@@ -51,7 +52,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void getRecipeByIdStatusNotFound() throws Exception{
+    public void getRecipeByIdStatusNotFound() throws Exception {
 
         //when
         when(recipeService.getById(anyLong())).thenThrow(NotFoundException.class);
@@ -63,7 +64,7 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void getRecipeById_withInvalidIdFormat_expectBadRequest() throws Exception{
+    public void getRecipeById_withInvalidIdFormat_expectBadRequest() throws Exception {
 
         //when
         mockMvc.perform(get("/recipe/1ccds/show"))

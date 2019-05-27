@@ -13,6 +13,7 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
     public static final Long LONG_ID = 1L;
     public static final String DESCRIPTION = "description";
     UnitOfMeasureCommandToUnitOfMeasure sut;
+
     @Before
     public void setUp() throws Exception {
         sut = new UnitOfMeasureCommandToUnitOfMeasure();
@@ -30,7 +31,8 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
 
     @Test
     public void convert() {
-        UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();;
+        UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
+        ;
         unitOfMeasureCommand.setId(LONG_ID);
         unitOfMeasureCommand.setDescription(DESCRIPTION);
 

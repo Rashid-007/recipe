@@ -8,7 +8,7 @@
         <version>2.2.0.M2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>throne.springreacto.recipe</groupId>
+    <groupId>throne.springreacto</groupId>
     <artifactId>recipe</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>recipe</name>
@@ -57,6 +57,11 @@
             <artifactId>bootstrap</artifactId>
             <version>3.3.7-1</version>
         </dependency>
+        <!-- mysql driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,16 +70,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <format>html</format>
-                    <format>xml</format>
-                </configuration>
-            </plugin>-->
-
+            <!-- Jacoco is compatible with Java 11  -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

@@ -35,6 +35,7 @@ public class IngredientControllerTest {
     MockMvc mockMvc;
 
     IngredientController sut;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -90,7 +91,7 @@ public class IngredientControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(model().attribute("unitOfMeasureList", hasSize(2)))
                 .andExpect(model().attributeExists("ingredient"))
-        .andExpect(view().name("/recipe/ingredient/ingredientform"));
+                .andExpect(view().name("/recipe/ingredient/ingredientform"));
     }
 
     @Test

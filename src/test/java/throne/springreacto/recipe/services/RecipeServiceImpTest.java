@@ -40,7 +40,7 @@ public class RecipeServiceImpTest {
     }
 
     @Test
-    public void getRecipeById(){
+    public void getRecipeById() {
         Recipe recipeById = new Recipe();
         recipeById.setId(RECIPE_ID);
         when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipeById));
@@ -49,16 +49,16 @@ public class RecipeServiceImpTest {
         Recipe recipe = sut.getById(RECIPE_ID);
 
         verify(recipeRepository).findById(anyLong());
-        assertEquals(Long.valueOf(RECIPE_ID) , recipe.getId());
+        assertEquals(Long.valueOf(RECIPE_ID), recipe.getId());
         assertNotNull("Null recipe returned", recipe);
         verify(recipeRepository, never()).findAll();
     }
 
     @Test(expected = NotFoundException.class)
-    public void getRecipeByIdNotFound(){
+    public void getRecipeByIdNotFound() {
 
         //given
-        Optional<Recipe> recipeOptional= Optional.empty();
+        Optional<Recipe> recipeOptional = Optional.empty();
 
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 

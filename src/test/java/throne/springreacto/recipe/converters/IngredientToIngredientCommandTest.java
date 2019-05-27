@@ -28,7 +28,7 @@ public class IngredientToIngredientCommandTest {
     }
 
     @Test
-    public void testNullConvert(){
+    public void testNullConvert() {
         assertNull(converter.convert(null));
     }
 
